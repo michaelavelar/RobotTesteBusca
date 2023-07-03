@@ -1,0 +1,10 @@
+*** Settings ***
+Library           SeleniumLibrary
+
+*** Test Cases ***
+Buscar notebook Acer no Magazine Luiza
+    Open Browser    https://www.magazineluiza.com.br/    chrome
+    Input Text    css=input[name="q"]    notebook Acer
+    Press Keys    css=input[name="q"]    \\13  # Simula o pressionamento da tecla Enter
+    Page Should Contain    Notebook Acer
+    Close Browser
