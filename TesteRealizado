@@ -1,0 +1,29 @@
+*** Settings ***
+Library           SeleniumLibrary
+
+*** Variables ***
+${URL}            https://www.magazineluiza.com.br/
+${Search_Input}   css=input[name="q"]
+
+*** Keywords ***
+Abrir o site do Magazine Luiza
+    Open Browser    ${URL}    chrome
+
+Realizar busca por notebook Acer
+    [Arguments]    ${search_term}
+    Input Text    ${Search_Input}    ${search_term}
+    Press Keys    ${Search_Input}    \\13
+
+Verificar resultado da busca
+    [Arguments]    ${expected_term}
+    Page Should Contain    ${expected_term}
+
+Fechar o navegador
+    Close Browser
+
+*** Test Cases ***
+Buscar notebook Acer no Magazine Luiza
+    Abrir o site do Magazine Luiza
+    Realizar busca por notebook Acer    notebook Acer
+    Verificar resultado da busca    Notebook Acer
+    Fechar o navegador
